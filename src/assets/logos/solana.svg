@@ -1,0 +1,9 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g opacity="0.9">
+    <path d="M35.5 72L43 64.5L50.5 72H35.5Z" stroke="#e0e0e0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M35.5 48L43 55.5L50.5 48H35.5Z" stroke="#e0e0e0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <line x1="60" y1="30" x2="60" y2="90" stroke="#e0e0e0" strokeWidth="2" strokeLinecap="round"/>
+    <path d="M69.5 72L77 64.5L84.5 72H69.5Z" stroke="#e0e0e0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M69.5 48L77 55.5L84.5 48H69.5Z" stroke="#e0e0e0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </g>
+</svg>
