@@ -1,10 +1,6 @@
 import {
   Github,
   Twitter,
-  Mail,
-  FileText,
-  BookOpen,
-  Zap,
 } from 'lucide-react';
 
 const data = {

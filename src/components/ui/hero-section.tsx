@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import turnstileLogo from "../../assets/logos/turnstile.png";
 import solanaLogo from "../../assets/logos/solana.png";
 
