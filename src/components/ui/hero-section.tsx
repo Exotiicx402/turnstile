@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import turnstileLogo from "../../assets/logos/turnstile.png";
 import solanaLogo from "../../assets/logos/solana.png";
+import { TokenTicker } from "./token-ticker";
 
 const colors = {
   50: "#f8f7f5",
@@ -169,6 +170,34 @@ export function HeroSection() {
       <div className="floating-element" style={{ top: "75%", left: "90%", animationDelay: "6.5s" }}></div>
 
       <div className="relative z-10 min-h-screen flex flex-col justify-between items-center px-8 py-12 md:px-16 md:py-20">
+        {/* X Logo */}
+        <div className="absolute top-8 left-1/2 transform -translate-x-1/2">
+          <a
+            href="https://x.com/turnstilefndn?s=11"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block opacity-0"
+            style={{
+              animation: "word-appear 1s ease-out forwards",
+              animationDelay: "0.3s"
+            }}
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="transition-transform hover:scale-110 duration-300"
+            >
+              <path
+                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                fill="#9ca3af"
+              />
+            </svg>
+          </a>
+        </div>
+
         {/* Top tagline */}
         <div className="text-center">
           <h2
@@ -206,6 +235,11 @@ export function HeroSection() {
               background: `linear-gradient(to right, transparent, ${colors[200]}, transparent)`,
             }}
           ></div>
+        </div>
+
+        {/* Token Ticker */}
+        <div className="w-full">
+          <TokenTicker />
         </div>
 
         {/* Logos */}

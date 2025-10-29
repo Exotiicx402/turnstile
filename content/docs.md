@@ -86,7 +86,7 @@ Solana handles settlement, Turnstile handles transparency:
 ### JavaScript/TypeScript
 
 ```bash
-npm install @turnstile/sdk @solana/web3.js
+npm install @exotiicx402/turnstile-sdk @solana/web3.js
 ```
 
 ### Python
@@ -100,7 +100,7 @@ pip install turnstile-sdk solana-py
 ### Initialize Client
 
 ```typescript
-import { TurnstileClient } from '@turnstile/sdk';
+import { TurnstileClient } from '@exotiicx402/turnstile-sdk';
 import { Connection, Keypair } from '@solana/web3.js';
 
 const connection = new Connection('https://api.mainnet-beta.solana.com');
@@ -245,14 +245,6 @@ Pay with $TSTL for reduced marketplace fees:
 | Gold | 100,000+ | 50% off |
 | Platinum | 1,000,000+ | 75% off |
 
-### Governance
-
-$TSTL holders can vote on:
-- Platform fee adjustments
-- Category additions
-- Treasury allocations
-- Protocol upgrades
-
 ### Staking Rewards
 
 Stake $TSTL to earn:
@@ -260,56 +252,46 @@ Stake $TSTL to earn:
 - Priority service access during high demand
 - Early access to new features
 
-## Token Distribution
-
-- **Community**: 40% (airdrops, liquidity mining)
-- **Team**: 20% (4-year vest)
-- **Investors**: 15% (2-year vest)
-- **Treasury**: 15% (grants, partnerships)
-- **Liquidity**: 10% (DEX pools)
-
 ## How to Acquire
 
 1. **Provide Services**: Earn $TSTL as provider rewards
-2. **Liquidity Mining**: Provide USDC-TSTL liquidity on Raydium
-3. **Airdrops**: Early users and contributors eligible
-4. **DEX Trading**: Buy on Raydium, Orca, Jupiter
+2. **DEX Trading**: Buy on Raydium, Orca, Jupiter
 
 ---
 
 # Roadmap
 
-## Phase 1: Foundation (Q1 2025) ✅
+## Phase 1: Foundation (Q1 2025)
 
-- ✅ Core x402 protocol implementation
-- ✅ Solana micropayment integration
-- ✅ Web marketplace UI
-- ✅ SDK (TypeScript + Python)
-- ✅ 10 launch partners
+- Core x402 protocol implementation
+- Solana micropayment integration
+- Web marketplace UI
+- SDK (TypeScript + Python)
+- 10 launch partners
 
-## Phase 2: Growth (Q2 2025) 🚧
+## Phase 2: Growth (Q2 2025)
 
-- 🚧 $TSTL token launch
-- 🚧 50+ service providers
-- 🚧 Advanced analytics dashboard
-- 🚧 Mobile SDK (React Native)
-- 🚧 LangChain/AutoGPT middleware
+- $TSTL token launch
+- 50+ service providers
+- Advanced analytics dashboard
+- Mobile SDK (React Native)
+- LangChain/AutoGPT middleware
 
-## Phase 3: Scale (Q3 2025) 📅
+## Phase 3: Scale (Q3 2025)
 
-- 📅 Multi-chain support (Ethereum L2s)
-- 📅 Enterprise tier with SLAs
-- 📅 Service composition (chain multiple APIs)
-- 📅 AI agent templates
-- 📅 White-label solutions
+- Multi-chain support (Ethereum L2s)
+- Enterprise tier with SLAs
+- Service composition (chain multiple APIs)
+- AI agent templates
+- White-label solutions
 
-## Phase 4: Ecosystem (Q4 2025) 📅
+## Phase 4: Ecosystem (Q4 2025)
 
-- 📅 DAO governance launch
-- 📅 Protocol v2 with advanced routing
-- 📅 Cross-chain bridges
-- 📅 Hardware wallet support
-- 📅 1,000+ active services
+- DAO governance launch
+- Protocol v2 with advanced routing
+- Cross-chain bridges
+- Hardware wallet support
+- 1,000+ active services
 
 ---
 
@@ -341,17 +323,6 @@ No. While optimized for autonomous agents, any developer can use Turnstile to co
 3. Return x402 headers on unauthenticated requests
 4. Payments auto-settle to your Solana wallet
 
-### What's the marketplace fee?
-
-Turnstile charges **5% of transaction value**, deducted from provider earnings. Pay with $TSTL for discounts (up to 75% off).
-
-### Can I set usage limits?
-
-Yes. Configure:
-- Max calls per user per day
-- Rate limits (calls per second)
-- Geographic restrictions
-- Wallet whitelists/blacklists
 
 ## For Builders
 
@@ -406,13 +377,7 @@ No. Turnstile never holds your funds. Payments flow directly from agent wallets 
 
 ## Need Help?
 
-- **Discord**: [discord.gg/turnstile](https://discord.gg/turnstile)
-- **Twitter**: [@turnstilefndn](https://twitter.com/turnstilefndn)
-- **GitHub**: [github.com/turnstile-xyz](https://github.com/turnstile-xyz)
-- **Email**: support@turnstile.xyz
+- **X**: [@turnstilefndn](https://twitter.com/turnstilefndn)
+- **Email**: support@turnstilefndn.org
 
 ---
-
-<div align="center">
-  <strong>Built on Solana. Powered by x402.</strong>
-</div>

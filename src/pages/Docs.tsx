@@ -88,12 +88,12 @@ export default function Docs() {
             <p className="mt-2">
               Questions?{' '}
               <a
-                href="https://discord.gg/turnstile"
+                href="https://x.com/turnstilefndn?s=11"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#f8f7f5] hover:underline"
               >
-                Join our Discord
+                Join our community
               </a>
             </p>
           </motion.div>

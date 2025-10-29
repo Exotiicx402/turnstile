@@ -32,22 +32,10 @@ export default function Home() {
       <RoadmapSection />
       <EmailSignup />
       
-      {/* Footer with X link */}
+      {/* Footer */}
       <footer className="bg-gradient-to-br from-[#1a1d18] via-black to-[#2a2e26] py-12">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <a
-            href="https://x.com/turnstilefndn?s=11"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white hover:bg-gray-100 transition-all hover:scale-110 shadow-lg"
-          >
-            <img 
-              src="https://res.cloudinary.com/dbdzl9lt6/image/upload/v1761684555/twitter_mp2o4n.png" 
-              alt="X (Twitter)" 
-              className="w-5 h-5"
-            />
-          </a>
-          <p className="mt-6 text-sm text-[#c8b4a0]/70">
+          <p className="text-sm text-[#c8b4a0]/70">
             &copy; 2025 Turnstile. Built on Solana. Powered by x402.
           </p>
         </div>

@@ -96,19 +96,19 @@ export default function RoadmapSection() {
           {roadmapData.map((quarter, index) => {
             const Icon = quarter.icon;
             
-            // Gradient colors for each quarter
+            // Gradient colors for each quarter - green to grayscale
             const gradients = [
-              'from-emerald-500/10 to-teal-500/10',
-              'from-teal-500/10 to-cyan-500/10',
-              'from-cyan-500/10 to-fuchsia-500/10',
-              'from-fuchsia-500/10 to-pink-500/10',
+              'from-emerald-500/10 to-emerald-600/10',
+              'from-emerald-600/10 to-slate-600/10',
+              'from-slate-600/10 to-slate-700/10',
+              'from-slate-700/10 to-slate-800/10',
             ];
             
             const borderGradients = [
-              'from-emerald-500/30 via-teal-500/20 to-transparent',
-              'from-teal-500/30 via-cyan-500/20 to-transparent',
-              'from-cyan-500/30 via-fuchsia-500/20 to-transparent',
-              'from-fuchsia-500/30 via-pink-500/20 to-transparent',
+              'from-emerald-500/30 via-emerald-600/20 to-transparent',
+              'from-emerald-600/30 via-slate-600/20 to-transparent',
+              'from-slate-600/30 via-slate-700/20 to-transparent',
+              'from-slate-700/30 via-slate-800/20 to-transparent',
             ];
 
             return (
