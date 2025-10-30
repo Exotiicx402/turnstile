@@ -30,8 +30,11 @@ export default function EmailSignup() {
             <p className="text-lg md:text-xl text-[#c8b4a0] font-light mb-2">
               Join the waitlist for early access to the x402 marketplace.
             </p>
+            <p className="text-sm text-[#c8b4a0]/80 font-light mb-2">
+              Token Launching October 30th, 2025 • Q4 2025
+            </p>
             <p className="text-sm text-[#c8b4a0]/80 font-light mb-8">
-              Launching October 30th, 2025 • Q4 2025
+              Platform Launching November 11th, 2025
             </p>
             
             {/* Success Message */}
