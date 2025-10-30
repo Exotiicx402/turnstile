@@ -169,9 +169,9 @@ export function HeroSection() {
       <div className="floating-element" style={{ top: "40%", left: "10%", animationDelay: "6s" }}></div>
       <div className="floating-element" style={{ top: "75%", left: "90%", animationDelay: "6.5s" }}></div>
 
-      <div className="relative z-10 min-h-screen flex flex-col justify-between items-center px-8 py-12 md:px-16 md:py-20">
+      <div className="relative z-10 min-h-screen flex flex-col justify-between items-center px-8 py-16 md:px-16 md:py-20">
         {/* X Logo */}
-        <div className="absolute top-8 left-1/2 transform -translate-x-1/2">
+        <div className="absolute top-6 left-1/2 transform -translate-x-1/2">
           <a
             href="https://x.com/turnstilefndn?s=11"
             target="_blank"
