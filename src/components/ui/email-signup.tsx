@@ -16,11 +16,6 @@ export default function EmailSignup() {
       setIsLoading(false);
       setShowSuccess(true);
       setEmail('');
-      
-      // Hide success message after 5 seconds
-      setTimeout(() => {
-        setShowSuccess(false);
-      }, 5000);
     }, 500);
   };
 
