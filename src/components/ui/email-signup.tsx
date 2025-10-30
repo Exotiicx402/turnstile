@@ -4,18 +4,24 @@ import { Mail, CheckCircle } from 'lucide-react';
 export default function EmailSignup() {
   const [email, setEmail] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle email submission
-    console.log('Email submitted:', email);
-    setShowSuccess(true);
-    setEmail('');
+    setIsLoading(true);
     
-    // Hide success message after 5 seconds
+    // Handle email submission with 0.5s delay
     setTimeout(() => {
-      setShowSuccess(false);
-    }, 5000);
+      console.log('Email submitted:', email);
+      setIsLoading(false);
+      setShowSuccess(true);
+      setEmail('');
+      
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        setShowSuccess(false);
+      }, 5000);
+    }, 500);
   };
 
   return (
@@ -61,10 +67,10 @@ export default function EmailSignup() {
               </div>
               <button
                 type="submit"
-                disabled={showSuccess}
+                disabled={showSuccess || isLoading}
                 className="px-8 py-4 bg-[#c8b4a0] text-[#1a1d18] font-semibold rounded-lg hover:bg-[#f8f7f5] transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#c8b4a0]/20 whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
-                Get Listed
+                {isLoading ? 'Submitting...' : 'Get Listed'}
               </button>
             </form>
             
