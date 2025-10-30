@@ -231,7 +231,7 @@ $TSTL is the native utility token of the Turnstile marketplace.
 - **Symbol**: TSTL
 - **Contract Address**: `8BdvBpxDbKQFCz8kpo4yaaG2mNr5XeQnYmjjfwKQpump`
 - **Max Supply**: 1,000,000,000
-- **Launch**: Q2 2025
+- **Launch**: October 30th, 2025
 
 ## Utility
 
