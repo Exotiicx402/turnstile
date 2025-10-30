@@ -31,7 +31,7 @@ export default function EmailSignup() {
               Join the waitlist for early access to the x402 marketplace.
             </p>
             <p className="text-sm text-[#c8b4a0]/80 font-light mb-8">
-              Launching November 11, 2025 • Q4 2025
+              Launching October 30th, 2025 • Q4 2025
             </p>
             
             {/* Success Message */}
