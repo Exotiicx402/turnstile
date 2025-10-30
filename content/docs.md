@@ -229,6 +229,7 @@ $TSTL is the native utility token of the Turnstile marketplace.
 **Token Details:**
 - **Network**: Solana (SPL Token)
 - **Symbol**: TSTL
+- **Contract Address**: `TBD - Coming Soon`
 - **Max Supply**: 1,000,000,000
 - **Launch**: Q2 2025
 

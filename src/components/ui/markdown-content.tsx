@@ -19,15 +19,22 @@ export function MarkdownContent({ content }: MarkdownContentProps) {
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
-          h1: ({ children, ...props }) => (
-            <h1
-              className="text-5xl font-extralight text-[#f8f7f5] mb-6 mt-12 pb-4 border-b border-[#3c4237] scroll-mt-20"
-              id={String(children).toLowerCase().replace(/\s+/g, '-')}
-              {...props}
-            >
-              {children}
-            </h1>
-          ),
+          h1: ({ children, ...props }) => {
+            const id = String(children)
+              .toLowerCase()
+              .replace(/[^a-z0-9\s$()-]/g, '')
+              .replace(/\s+/g, '-')
+              .replace(/\$tstl/g, 'token-tstl');
+            return (
+              <h1
+                className="text-5xl font-extralight text-[#f8f7f5] mb-6 mt-12 pb-4 border-b border-[#3c4237] scroll-mt-20"
+                id={id}
+                {...props}
+              >
+                {children}
+              </h1>
+            );
+          },
           h2: ({ children, ...props }) => (
             <h2
               className="text-3xl font-light text-[#f8f7f5] mb-4 mt-10 scroll-mt-20"

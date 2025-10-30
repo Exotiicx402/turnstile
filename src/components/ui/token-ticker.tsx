@@ -7,9 +7,14 @@ export function TokenTicker() {
         animationDelay: "1.6s"
       }}
     >
-      <p className="text-2xl md:text-3xl font-light text-gray-400">
+      <a 
+        href="https://x.com/turnstilefndn?s=11"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-2xl md:text-3xl font-light text-gray-400 hover:text-gray-300 transition-colors cursor-pointer"
+      >
         $TSTL
-      </p>
+      </a>
     </div>
   );
 }
