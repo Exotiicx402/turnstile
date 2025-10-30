@@ -20,11 +20,14 @@ export function MarkdownContent({ content }: MarkdownContentProps) {
         remarkPlugins={[remarkGfm]}
         components={{
           h1: ({ children, ...props }) => {
-            const id = String(children)
+            let id = String(children)
               .toLowerCase()
-              .replace(/[^a-z0-9\s$()-]/g, '')
-              .replace(/\s+/g, '-')
-              .replace(/\$tstl/g, 'token-tstl');
+              .replace(/\(\$tstl\)/g, '-tstl')  // Handle ($TSTL) special case
+              .replace(/[^a-z0-9\s-]/g, '')     // Remove special chars except dash
+              .replace(/\s+/g, '-')              // Replace spaces with dash
+              .replace(/-+/g, '-')               // Remove duplicate dashes
+              .replace(/^-|-$/g, '');            // Remove leading/trailing dashes
+            
             return (
               <h1
                 className="text-5xl font-extralight text-[#f8f7f5] mb-6 mt-12 pb-4 border-b border-[#3c4237] scroll-mt-20"
