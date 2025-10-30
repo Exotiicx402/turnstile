@@ -39,7 +39,7 @@ export default function EmailSignup() {
               <div className="mb-6 p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-lg flex items-center gap-3 animate-in fade-in slide-in-from-top-2 duration-300">
                 <CheckCircle className="w-5 h-5 text-emerald-400 flex-shrink-0" />
                 <p className="text-emerald-400 text-sm">
-                  Success! You've been added to the waitlist. Check your email for confirmation.
+                  Thank you, we start pre-announcement 7 days before the platform goes live.
                 </p>
               </div>
             )}
@@ -74,8 +74,8 @@ export default function EmailSignup() {
           <div className="order-1 lg:order-2">
             <div className="relative rounded-2xl overflow-hidden border border-[#3c4237] hover:border-[#c8b4a0] transition-all duration-300">
               <img
-                src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=2070&auto=format&fit=crop"
-                alt="Blockchain network visualization"
+                src="https://res.cloudinary.com/dbdzl9lt6/image/upload/v1761794666/ChatGPT_Image_Oct_29_2025_08_22_02_PM_ztsfqs.png"
+                alt="Turnstile Platform"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#1a1d18] via-transparent to-transparent opacity-60" />
