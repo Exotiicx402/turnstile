@@ -254,6 +254,10 @@ Stake $TSTL to earn:
 - Priority service access during high demand
 - Early access to new features
 
+## Early Adopter Benefits
+
+Holders who acquire $TSTL before the marketplace launch (November 11th, 2025) get immediate access to fee discount tiers and priority positioning for staking rewards when the platform goes live.
+
 ## How to Acquire
 
 1. **Provide Services**: Earn $TSTL as provider rewards
