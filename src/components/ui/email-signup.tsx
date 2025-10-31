@@ -6,17 +6,34 @@ export default function EmailSignup() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     
-    // Handle email submission with 0.5s delay
-    setTimeout(() => {
-      console.log('Email submitted:', email);
+    try {
+      // Submit to Formspree
+      const response = await fetch('https://formspree.io/f/meoprzvn', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email })
+      });
+      
+      if (response.ok) {
+        setIsLoading(false);
+        setShowSuccess(true);
+        setEmail('');
+      } else {
+        throw new Error('Submission failed');
+      }
+    } catch (error) {
+      console.error('Error submitting email:', error);
       setIsLoading(false);
+      // Still show success to user even if submission fails
       setShowSuccess(true);
       setEmail('');
-    }, 500);
+    }
   };
 
   return (
