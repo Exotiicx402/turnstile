@@ -12,7 +12,7 @@ setup(
     description="Official Python SDK for Turnstile - The Solana-native x402 marketplace for AI agents and on-chain services",
     long_description=README,
     long_description_content_type="text/markdown",
-    author="Turnstile Foundation",
+    author="exotiicx402",
     author_email="support@turnstile.xyz",
     url="https://github.com/Exotiicx402/turnstile",
     project_urls={
