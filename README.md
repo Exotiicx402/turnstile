@@ -1,4 +1,8 @@
-# React + TypeScript + Vite
+# Turnstile
+
+The Solana-native x402 marketplace for AI agents and on-chain services.
+
+## React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
