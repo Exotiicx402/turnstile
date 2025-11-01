@@ -286,18 +286,18 @@ export default function Marketplace() {
         </div>
 
         {/* Services Table */}
-        <div className="bg-[#1a1d18]/50 border border-[#3c4237] rounded-xl overflow-hidden">
+        <div className="bg-[#1a1d18] border border-[#3c4237] rounded-2xl overflow-hidden shadow-xl">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-[#2a2e26] border-b border-[#3c4237]">
-                <tr>
-                  <th className="px-6 py-4 text-left text-[#c8b4a0] text-sm font-semibold">Service</th>
-                  <th className="px-6 py-4 text-center text-[#c8b4a0] text-sm font-semibold">Activity</th>
-                  <th className="px-6 py-4 text-right text-[#c8b4a0] text-sm font-semibold">24h Calls</th>
-                  <th className="px-6 py-4 text-right text-[#c8b4a0] text-sm font-semibold">Price/Call</th>
-                  <th className="px-6 py-4 text-center text-[#c8b4a0] text-sm font-semibold">Uptime</th>
-                  <th className="px-6 py-4 text-center text-[#c8b4a0] text-sm font-semibold">Rating</th>
-                  <th className="px-6 py-4 text-right text-[#c8b4a0] text-sm font-semibold">Latest</th>
+              <thead>
+                <tr className="border-b border-[#3c4237]">
+                  <th className="px-8 py-5 text-left text-[#c8b4a0]/70 text-xs font-semibold uppercase tracking-wider">Service</th>
+                  <th className="px-6 py-5 text-center text-[#c8b4a0]/70 text-xs font-semibold uppercase tracking-wider">Activity</th>
+                  <th className="px-6 py-5 text-right text-[#c8b4a0]/70 text-xs font-semibold uppercase tracking-wider">24h Calls</th>
+                  <th className="px-6 py-5 text-right text-[#c8b4a0]/70 text-xs font-semibold uppercase tracking-wider">Price</th>
+                  <th className="px-6 py-5 text-center text-[#c8b4a0]/70 text-xs font-semibold uppercase tracking-wider">Uptime</th>
+                  <th className="px-6 py-5 text-center text-[#c8b4a0]/70 text-xs font-semibold uppercase tracking-wider">Rating</th>
+                  <th className="px-6 py-5 text-right text-[#c8b4a0]/70 text-xs font-semibold uppercase tracking-wider">Latest</th>
                 </tr>
               </thead>
               <tbody>
@@ -305,70 +305,79 @@ export default function Marketplace() {
                   <tr 
                     key={service.id}
                     onClick={() => setSelectedService(service)}
-                    className="border-b border-[#3c4237] hover:bg-[#2a2e26]/30 cursor-pointer transition-colors"
+                    className="border-b border-[#3c4237]/50 hover:bg-[#2a2e26]/50 cursor-pointer transition-all duration-200 group"
                   >
                     {/* Service Name & Provider */}
-                    <td className="px-6 py-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-[#c8b4a0]/10 flex items-center justify-center">
-                          <span className="text-[#c8b4a0] font-bold text-lg">{service.name.charAt(0)}</span>
+                    <td className="px-8 py-5">
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#c8b4a0]/20 to-[#c8b4a0]/5 flex items-center justify-center group-hover:from-[#c8b4a0]/30 group-hover:to-[#c8b4a0]/10 transition-all">
+                          <span className="text-[#c8b4a0] font-bold text-xl">{service.name.charAt(0)}</span>
                         </div>
                         <div>
-                          <div className="text-[#f8f7f5] font-semibold">{service.name}</div>
-                          <div className="text-[#c8b4a0]/70 text-sm font-mono">{service.providerAddress}</div>
+                          <div className="text-[#f8f7f5] font-semibold text-base mb-1 group-hover:text-[#c8b4a0] transition-colors">{service.name}</div>
+                          <div className="text-[#c8b4a0]/60 text-xs font-mono">{service.providerAddress}</div>
                         </div>
                       </div>
                     </td>
                     
                     {/* Activity Sparkline (mock) */}
-                    <td className="px-6 py-4">
+                    <td className="px-6 py-5">
                       <div className="flex items-center justify-center">
-                        <TrendingUp className="w-12 h-6 text-[#c8b4a0]/50" />
+                        <svg width="60" height="24" className="opacity-60">
+                          <polyline
+                            points="0,20 15,12 30,8 45,15 60,5"
+                            fill="none"
+                            stroke="#c8b4a0"
+                            strokeWidth="2"
+                            className="group-hover:stroke-[#f8f7f5] transition-colors"
+                          />
+                        </svg>
                       </div>
                     </td>
                     
                     {/* 24h Calls */}
-                    <td className="px-6 py-4 text-right">
-                      <span className="text-[#f8f7f5] font-semibold">
+                    <td className="px-6 py-5 text-right">
+                      <span className="text-[#f8f7f5] font-bold text-base">
                         {service.callsLast24h > 1000 
                           ? `${(service.callsLast24h / 1000).toFixed(1)}K` 
-                          : service.callsLast24h}
+                          : service.callsLast24h.toLocaleString()}
                       </span>
                     </td>
                     
                     {/* Price */}
-                    <td className="px-6 py-4 text-right">
-                      <span className="text-[#f8f7f5] font-semibold">
+                    <td className="px-6 py-5 text-right">
+                      <div className="text-[#f8f7f5] font-bold text-base">
                         ${service.pricePerCall < 0.001 
                           ? service.pricePerCall.toFixed(6) 
                           : service.pricePerCall.toFixed(4)}
-                      </span>
+                      </div>
+                      <div className="text-[#c8b4a0]/50 text-xs mt-0.5">{service.currency}</div>
                     </td>
                     
                     {/* Uptime */}
-                    <td className="px-6 py-4 text-center">
-                      <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                    <td className="px-6 py-5 text-center">
+                      <span className={`px-3 py-1.5 rounded-lg text-xs font-bold ${
                         service.uptime >= 99.5 
-                          ? 'bg-emerald-500/10 text-emerald-400'
+                          ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
                           : service.uptime >= 98
-                          ? 'bg-yellow-500/10 text-yellow-400'
-                          : 'bg-red-500/10 text-red-400'
+                          ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
+                          : 'bg-red-500/20 text-red-400 border border-red-500/30'
                       }`}>
                         {service.uptime}%
                       </span>
                     </td>
                     
                     {/* Rating */}
-                    <td className="px-6 py-4 text-center">
-                      <div className="flex items-center justify-center gap-1">
+                    <td className="px-6 py-5 text-center">
+                      <div className="flex items-center justify-center gap-1.5">
                         <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                        <span className="text-[#f8f7f5] font-semibold">{service.rating}</span>
+                        <span className="text-[#f8f7f5] font-bold text-base">{service.rating}</span>
                       </div>
                     </td>
                     
                     {/* Latest Activity */}
-                    <td className="px-6 py-4 text-right">
-                      <span className="text-[#c8b4a0]/70 text-sm">2m ago</span>
+                    <td className="px-6 py-5 text-right">
+                      <span className="text-[#c8b4a0]/60 text-sm font-medium">2m ago</span>
                     </td>
                   </tr>
                 ))}
@@ -377,15 +386,15 @@ export default function Marketplace() {
           </div>
           
           {/* Pagination */}
-          <div className="flex items-center justify-between px-6 py-4 bg-[#2a2e26]/50 border-t border-[#3c4237]">
-            <p className="text-[#c8b4a0]/70 text-sm">
-              Showing {filteredServices.length} of {mockServices.length} services
+          <div className="flex items-center justify-between px-8 py-5 border-t border-[#3c4237]">
+            <p className="text-[#c8b4a0]/60 text-sm font-light">
+              Showing <span className="font-semibold text-[#f8f7f5]">{filteredServices.length}</span> of <span className="font-semibold text-[#f8f7f5]">{mockServices.length}</span> services
             </p>
-            <div className="flex gap-2">
-              <button className="px-3 py-1 bg-[#1a1d18] border border-[#3c4237] rounded text-[#c8b4a0] text-sm hover:border-[#c8b4a0] transition-colors">
+            <div className="flex gap-3">
+              <button className="px-4 py-2 bg-[#2a2e26] border border-[#3c4237] rounded-lg text-[#c8b4a0] text-sm font-medium hover:border-[#c8b4a0] hover:bg-[#3c4237] transition-all">
                 Previous
               </button>
-              <button className="px-3 py-1 bg-[#1a1d18] border border-[#3c4237] rounded text-[#c8b4a0] text-sm hover:border-[#c8b4a0] transition-colors">
+              <button className="px-4 py-2 bg-[#2a2e26] border border-[#3c4237] rounded-lg text-[#c8b4a0] text-sm font-medium hover:border-[#c8b4a0] hover:bg-[#3c4237] transition-all">
                 Next
               </button>
             </div>
