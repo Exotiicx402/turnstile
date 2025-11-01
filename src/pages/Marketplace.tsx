@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Search, Filter, TrendingUp, Zap, Database, Brain, Code } from 'lucide-react';
 import ServiceCard from '../components/marketplace/ServiceCard';
 import ServiceModal from '../components/marketplace/ServiceModal';
@@ -164,6 +164,17 @@ export default function Marketplace() {
   const [sortBy, setSortBy] = useState<'popular' | 'price' | 'rating'>('popular');
   const [selectedService, setSelectedService] = useState<Service | null>(null);
 
+  useEffect(() => {
+    // Fade in animation on mount
+    const elements = document.querySelectorAll('.fade-in');
+    elements.forEach((el, index) => {
+      setTimeout(() => {
+        el.classList.add('opacity-100');
+        el.classList.remove('opacity-0');
+      }, index * 100);
+    });
+  }, []);
+
   const filteredServices = mockServices
     .filter(service => {
       const matchesSearch = service.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -187,16 +198,16 @@ export default function Marketplace() {
           <div className="flex items-center gap-3 mb-2">
             <Zap className="w-10 h-10 text-[#c8b4a0]" />
             <div>
-              <h1 className="text-3xl font-bold text-[#f8f7f5]">Turnstile Explorer</h1>
-              <p className="text-[#c8b4a0]/70 text-sm">x402 Marketplace • Solana Micropayments</p>
+              <h1 className="text-3xl font-extralight text-[#f8f7f5]">Turnstile Explorer</h1>
+              <p className="text-[#c8b4a0]/70 text-sm font-light">x402 Marketplace • Solana Micropayments</p>
             </div>
           </div>
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 opacity-0 fade-in transition-opacity duration-700">
         {/* Search Bar - Prominent */}
-        <div className="mb-8">
+        <div className="mb-8 opacity-0 fade-in transition-opacity duration-700">
           <div className="relative max-w-3xl mx-auto mb-6">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#c8b4a0]/50" />
             <input
