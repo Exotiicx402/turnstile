@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { X, Star, Activity, Clock, TrendingUp, Zap, ExternalLink, Copy, CheckCircle } from 'lucide-react';
-import { Service } from '../../pages/Marketplace';
+import type { Service } from '../../pages/Marketplace';
 
 interface ServiceModalProps {
   service: Service;

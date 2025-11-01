@@ -1,5 +1,5 @@
 import { Star, Activity, Clock, TrendingUp } from 'lucide-react';
-import { Service } from '../../pages/Marketplace';
+import type { Service } from '../../pages/Marketplace';
 
 interface ServiceCardProps {
   service: Service;
