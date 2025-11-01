@@ -285,20 +285,111 @@ export default function Marketplace() {
           </div>
         </div>
 
-        {/* Results Count */}
-        <p className="text-[#c8b4a0]/70 text-sm mb-4">
-          {filteredServices.length} service{filteredServices.length !== 1 ? 's' : ''} found
-        </p>
-
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredServices.map(service => (
-            <ServiceCard
-              key={service.id}
-              service={service}
-              onClick={() => setSelectedService(service)}
-            />
-          ))}
+        {/* Services Table */}
+        <div className="bg-[#1a1d18]/50 border border-[#3c4237] rounded-xl overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead className="bg-[#2a2e26] border-b border-[#3c4237]">
+                <tr>
+                  <th className="px-6 py-4 text-left text-[#c8b4a0] text-sm font-semibold">Service</th>
+                  <th className="px-6 py-4 text-center text-[#c8b4a0] text-sm font-semibold">Activity</th>
+                  <th className="px-6 py-4 text-right text-[#c8b4a0] text-sm font-semibold">24h Calls</th>
+                  <th className="px-6 py-4 text-right text-[#c8b4a0] text-sm font-semibold">Price/Call</th>
+                  <th className="px-6 py-4 text-center text-[#c8b4a0] text-sm font-semibold">Uptime</th>
+                  <th className="px-6 py-4 text-center text-[#c8b4a0] text-sm font-semibold">Rating</th>
+                  <th className="px-6 py-4 text-right text-[#c8b4a0] text-sm font-semibold">Latest</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredServices.map((service, index) => (
+                  <tr 
+                    key={service.id}
+                    onClick={() => setSelectedService(service)}
+                    className="border-b border-[#3c4237] hover:bg-[#2a2e26]/30 cursor-pointer transition-colors"
+                  >
+                    {/* Service Name & Provider */}
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-lg bg-[#c8b4a0]/10 flex items-center justify-center">
+                          <span className="text-[#c8b4a0] font-bold text-lg">{service.name.charAt(0)}</span>
+                        </div>
+                        <div>
+                          <div className="text-[#f8f7f5] font-semibold">{service.name}</div>
+                          <div className="text-[#c8b4a0]/70 text-sm font-mono">{service.providerAddress}</div>
+                        </div>
+                      </div>
+                    </td>
+                    
+                    {/* Activity Sparkline (mock) */}
+                    <td className="px-6 py-4">
+                      <div className="flex items-center justify-center">
+                        <TrendingUp className="w-12 h-6 text-[#c8b4a0]/50" />
+                      </div>
+                    </td>
+                    
+                    {/* 24h Calls */}
+                    <td className="px-6 py-4 text-right">
+                      <span className="text-[#f8f7f5] font-semibold">
+                        {service.callsLast24h > 1000 
+                          ? `${(service.callsLast24h / 1000).toFixed(1)}K` 
+                          : service.callsLast24h}
+                      </span>
+                    </td>
+                    
+                    {/* Price */}
+                    <td className="px-6 py-4 text-right">
+                      <span className="text-[#f8f7f5] font-semibold">
+                        ${service.pricePerCall < 0.001 
+                          ? service.pricePerCall.toFixed(6) 
+                          : service.pricePerCall.toFixed(4)}
+                      </span>
+                    </td>
+                    
+                    {/* Uptime */}
+                    <td className="px-6 py-4 text-center">
+                      <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                        service.uptime >= 99.5 
+                          ? 'bg-emerald-500/10 text-emerald-400'
+                          : service.uptime >= 98
+                          ? 'bg-yellow-500/10 text-yellow-400'
+                          : 'bg-red-500/10 text-red-400'
+                      }`}>
+                        {service.uptime}%
+                      </span>
+                    </td>
+                    
+                    {/* Rating */}
+                    <td className="px-6 py-4 text-center">
+                      <div className="flex items-center justify-center gap-1">
+                        <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                        <span className="text-[#f8f7f5] font-semibold">{service.rating}</span>
+                      </div>
+                    </td>
+                    
+                    {/* Latest Activity */}
+                    <td className="px-6 py-4 text-right">
+                      <span className="text-[#c8b4a0]/70 text-sm">2m ago</span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          
+          {/* Pagination */}
+          <div className="flex items-center justify-between px-6 py-4 bg-[#2a2e26]/50 border-t border-[#3c4237]">
+            <p className="text-[#c8b4a0]/70 text-sm">
+              Showing {filteredServices.length} of {mockServices.length} services
+            </p>
+            <div className="flex gap-2">
+              <button className="px-3 py-1 bg-[#1a1d18] border border-[#3c4237] rounded text-[#c8b4a0] text-sm hover:border-[#c8b4a0] transition-colors">
+                Previous
+              </button>
+              <button className="px-3 py-1 bg-[#1a1d18] border border-[#3c4237] rounded text-[#c8b4a0] text-sm hover:border-[#c8b4a0] transition-colors">
+                Next
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Empty State */}
