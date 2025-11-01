@@ -1,5 +1,5 @@
 import { Star, Activity, Clock, TrendingUp } from 'lucide-react';
-import type { Service } from '../../pages/Marketplace';
+import type { Service } from '../../types/service';
 
 interface ServiceCardProps {
   service: Service;
@@ -33,7 +33,7 @@ export default function ServiceCard({ service, onClick }: ServiceCardProps) {
 
       {/* Tags */}
       <div className="flex flex-wrap gap-2 mb-4">
-        {service.tags.slice(0, 3).map(tag => (
+        {service.tags.slice(0, 3).map((tag: string) => (
           <span
             key={tag}
             className="px-2 py-1 bg-[#1a1d18] text-[#c8b4a0] text-xs rounded-md"

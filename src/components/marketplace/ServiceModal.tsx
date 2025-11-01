@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { X, Star, Activity, Clock, TrendingUp, Zap, ExternalLink, Copy, CheckCircle } from 'lucide-react';
-import type { Service } from '../../pages/Marketplace';
+import type { Service } from '../../types/service';
 
 interface ServiceModalProps {
   service: Service;
@@ -123,7 +123,7 @@ export default function ServiceModal({ service, onClose }: ServiceModalProps) {
           <div className="mb-6">
             <h3 className="text-[#f8f7f5] text-lg font-semibold mb-2">Tags</h3>
             <div className="flex flex-wrap gap-2">
-              {service.tags.map(tag => (
+              {service.tags.map((tag: string) => (
                 <span
                   key={tag}
                   className="px-3 py-1 bg-[#2a2e26] text-[#c8b4a0] text-sm rounded-lg"

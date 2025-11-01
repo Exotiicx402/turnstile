@@ -1,167 +1,35 @@
 import { useState, useEffect } from 'react';
-import { Search, Filter, TrendingUp, Zap, Database, Brain, Code, Star } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Search, Filter, TrendingUp, Database, Brain, Code, Star } from 'lucide-react';
 import ServiceModal from '../components/marketplace/ServiceModal';
-
-export interface Service {
-  id: string;
-  name: string;
-  provider: string;
-  providerAddress: string;
-  description: string;
-  category: string;
-  pricePerCall: number;
-  currency: 'USDC' | 'TSTL';
-  callsLast24h: number;
-  uptime: number;
-  rating: number;
-  latency: number;
-  tags: string[];
-  endpoint: string;
-}
-
-const mockServices: Service[] = [
-  {
-    id: 'gpt-4-inference',
-    name: 'GPT-4 Inference',
-    provider: 'OpenAI Labs',
-    providerAddress: 'Exo7...3k2m',
-    description: 'State-of-the-art language model for text generation, analysis, and reasoning',
-    category: 'AI/ML',
-    pricePerCall: 0.015,
-    currency: 'USDC',
-    callsLast24h: 12453,
-    uptime: 99.9,
-    rating: 4.8,
-    latency: 850,
-    tags: ['LLM', 'GPT-4', 'Text Generation'],
-    endpoint: 'https://api.openailabs.io/v1/gpt4'
-  },
-  {
-    id: 'solana-rpc',
-    name: 'Solana RPC Ultra',
-    provider: 'Helius',
-    providerAddress: '8Bdv...pump',
-    description: 'High-performance Solana RPC with enhanced APIs and webhooks',
-    category: 'Data',
-    pricePerCall: 0.0001,
-    currency: 'USDC',
-    callsLast24h: 89234,
-    uptime: 99.99,
-    rating: 4.9,
-    latency: 45,
-    tags: ['Blockchain', 'Solana', 'RPC'],
-    endpoint: 'https://rpc.helius.xyz'
-  },
-  {
-    id: 'image-gen',
-    name: 'Stable Diffusion XL',
-    provider: 'Replicate',
-    providerAddress: 'CiF5...sjtR',
-    description: 'High-quality image generation from text prompts',
-    category: 'AI/ML',
-    pricePerCall: 0.025,
-    currency: 'USDC',
-    callsLast24h: 5621,
-    uptime: 99.7,
-    rating: 4.7,
-    latency: 3200,
-    tags: ['Image Generation', 'Stable Diffusion', 'AI Art'],
-    endpoint: 'https://api.replicate.com/v1/sdxl'
-  },
-  {
-    id: 'market-data',
-    name: 'Real-Time Market Data',
-    provider: 'CoinGecko Pro',
-    providerAddress: 'Ab3t...9kLm',
-    description: 'Live cryptocurrency prices, volume, and market cap data',
-    category: 'Data',
-    pricePerCall: 0.0005,
-    currency: 'USDC',
-    callsLast24h: 34567,
-    uptime: 99.95,
-    rating: 4.8,
-    latency: 120,
-    tags: ['Crypto', 'Market Data', 'Prices'],
-    endpoint: 'https://pro-api.coingecko.com/v3'
-  },
-  {
-    id: 'code-execution',
-    name: 'Sandboxed Code Runner',
-    provider: 'Piston Engine',
-    providerAddress: 'Qw8r...4nPo',
-    description: 'Execute code in 40+ languages securely in isolated containers',
-    category: 'Tools',
-    pricePerCall: 0.002,
-    currency: 'USDC',
-    callsLast24h: 8923,
-    uptime: 99.8,
-    rating: 4.6,
-    latency: 450,
-    tags: ['Code Execution', 'Sandbox', 'Multi-Language'],
-    endpoint: 'https://api.piston.io/v2/execute'
-  },
-  {
-    id: 'whisper-transcription',
-    name: 'Whisper Audio Transcription',
-    provider: 'AssemblyAI',
-    providerAddress: 'Ty5u...7vBn',
-    description: 'Highly accurate speech-to-text transcription in 50+ languages',
-    category: 'AI/ML',
-    pricePerCall: 0.01,
-    currency: 'USDC',
-    callsLast24h: 3456,
-    uptime: 99.6,
-    rating: 4.7,
-    latency: 2100,
-    tags: ['Audio', 'Transcription', 'Speech-to-Text'],
-    endpoint: 'https://api.assemblyai.com/v2/transcript'
-  },
-  {
-    id: 'embeddings',
-    name: 'Text Embeddings API',
-    provider: 'Cohere',
-    providerAddress: 'Gh9i...2mNb',
-    description: 'Generate semantic embeddings for text similarity and search',
-    category: 'AI/ML',
-    pricePerCall: 0.0002,
-    currency: 'USDC',
-    callsLast24h: 15678,
-    uptime: 99.9,
-    rating: 4.8,
-    latency: 180,
-    tags: ['Embeddings', 'NLP', 'Vector Search'],
-    endpoint: 'https://api.cohere.ai/v1/embed'
-  },
-  {
-    id: 'nft-metadata',
-    name: 'NFT Metadata Indexer',
-    provider: 'SimpleHash',
-    providerAddress: 'Jk4l...6cVx',
-    description: 'Comprehensive NFT metadata across multiple blockchains',
-    category: 'Data',
-    pricePerCall: 0.0003,
-    currency: 'USDC',
-    callsLast24h: 23456,
-    uptime: 99.85,
-    rating: 4.7,
-    latency: 250,
-    tags: ['NFT', 'Metadata', 'Multi-Chain'],
-    endpoint: 'https://api.simplehash.com/v1'
-  }
-];
-
-const categories = [
-  { name: 'All', icon: Filter, count: mockServices.length },
-  { name: 'AI/ML', icon: Brain, count: mockServices.filter(s => s.category === 'AI/ML').length },
-  { name: 'Data', icon: Database, count: mockServices.filter(s => s.category === 'Data').length },
-  { name: 'Tools', icon: Code, count: mockServices.filter(s => s.category === 'Tools').length },
-];
+import { fetchServices } from '../services/api';
+import type { Service } from '../types/service';
 
 export default function Marketplace() {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [sortBy, setSortBy] = useState<'popular' | 'price' | 'rating'>('popular');
   const [selectedService, setSelectedService] = useState<Service | null>(null);
+  const [services, setServices] = useState<Service[]>([]);
+  const [, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadServices = async () => {
+      setLoading(true);
+      const data = await fetchServices();
+      setServices(data);
+      setLoading(false);
+    };
+    loadServices();
+  }, []);
+
+  const categories = [
+    { name: 'All', icon: Filter, count: services.length },
+    { name: 'AI/ML', icon: Brain, count: services.filter(s => s.category === 'AI/ML').length },
+    { name: 'Data', icon: Database, count: services.filter(s => s.category === 'Data').length },
+    { name: 'Tools', icon: Code, count: services.filter(s => s.category === 'Tools').length },
+  ];
 
   useEffect(() => {
     // Fade in animation on mount
@@ -174,7 +42,7 @@ export default function Marketplace() {
     });
   }, []);
 
-  const filteredServices = mockServices
+  const filteredServices = services
     .filter(service => {
       const matchesSearch = service.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           service.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -195,7 +63,11 @@ export default function Marketplace() {
       <header className="border-b border-[#3c4237] bg-[#1a1d18]/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center gap-3 mb-2">
-            <Zap className="w-10 h-10 text-[#c8b4a0]" />
+            <img 
+              src="https://res.cloudinary.com/dbdzl9lt6/image/upload/v1761631718/Untitled_design_2_dada2f.png" 
+              alt="Turnstile Logo" 
+              className="w-10 h-10 object-contain"
+            />
             <div>
               <h1 className="text-3xl font-extralight text-[#f8f7f5]">Turnstile Explorer</h1>
               <p className="text-[#c8b4a0]/70 text-sm font-light">x402 Marketplace • Solana Micropayments</p>
@@ -259,27 +131,27 @@ export default function Marketplace() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
           <div className="bg-[#2a2e26]/50 border border-[#3c4237] rounded-lg p-4">
             <p className="text-[#c8b4a0]/70 text-sm mb-1">Total Services</p>
-            <p className="text-[#f8f7f5] text-2xl font-bold">{mockServices.length}</p>
+            <p className="text-[#f8f7f5] text-2xl font-bold">{services.length}</p>
           </div>
           <div className="bg-[#2a2e26]/50 border border-[#3c4237] rounded-lg p-4">
             <p className="text-[#c8b4a0]/70 text-sm mb-1">24h Calls</p>
             <div className="flex items-center gap-2">
               <TrendingUp className="w-5 h-5 text-emerald-400" />
               <p className="text-[#f8f7f5] text-2xl font-bold">
-                {mockServices.reduce((sum, s) => sum + s.callsLast24h, 0).toLocaleString()}
+                {services.reduce((sum, s) => sum + s.callsLast24h, 0).toLocaleString()}
               </p>
             </div>
           </div>
           <div className="bg-[#2a2e26]/50 border border-[#3c4237] rounded-lg p-4">
             <p className="text-[#c8b4a0]/70 text-sm mb-1">Avg Uptime</p>
             <p className="text-[#f8f7f5] text-2xl font-bold">
-              {(mockServices.reduce((sum, s) => sum + s.uptime, 0) / mockServices.length).toFixed(1)}%
+              {services.length > 0 ? (services.reduce((sum, s) => sum + s.uptime, 0) / services.length).toFixed(1) : '0.0'}%
             </p>
           </div>
           <div className="bg-[#2a2e26]/50 border border-[#3c4237] rounded-lg p-4">
             <p className="text-[#c8b4a0]/70 text-sm mb-1">Active Providers</p>
             <p className="text-[#f8f7f5] text-2xl font-bold">
-              {new Set(mockServices.map(s => s.provider)).size}
+              {new Set(services.map(s => s.provider)).size}
             </p>
           </div>
         </div>
@@ -301,9 +173,9 @@ export default function Marketplace() {
               </thead>
               <tbody>
                 {filteredServices.map((service) => (
-                  <tr
+                  <tr 
                     key={service.id}
-                    onClick={() => setSelectedService(service)}
+                    onClick={() => navigate(`/v1/service/${service.id}`)}
                     className="border-b border-[#3c4237]/50 hover:bg-[#2a2e26]/50 cursor-pointer transition-all duration-200 group"
                   >
                     {/* Service Name & Provider */}
@@ -387,7 +259,7 @@ export default function Marketplace() {
           {/* Pagination */}
           <div className="flex items-center justify-between px-8 py-5 border-t border-[#3c4237]">
             <p className="text-[#c8b4a0]/60 text-sm font-light">
-              Showing <span className="font-semibold text-[#f8f7f5]">{filteredServices.length}</span> of <span className="font-semibold text-[#f8f7f5]">{mockServices.length}</span> services
+              Showing <span className="font-semibold text-[#f8f7f5]">{filteredServices.length}</span> of <span className="font-semibold text-[#f8f7f5]">{services.length}</span> services
             </p>
             <div className="flex gap-3">
               <button className="px-4 py-2 bg-[#2a2e26] border border-[#3c4237] rounded-lg text-[#c8b4a0] text-sm font-medium hover:border-[#c8b4a0] hover:bg-[#3c4237] transition-all">
