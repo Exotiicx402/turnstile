@@ -31,8 +31,8 @@ export default function Home() {
       </div>
       <HowItWorks />
       <RoadmapSection />
-      <ProviderSignup />
       <EmailSignup />
+      <ProviderSignup />
       
       {/* Footer */}
       <footer className="bg-gradient-to-br from-[#1a1d18] via-black to-[#2a2e26] py-12">
