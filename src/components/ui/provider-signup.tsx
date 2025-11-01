@@ -101,10 +101,6 @@ export default function ProviderSignup() {
                 {isLoading ? 'Submitting...' : 'Apply to List Your API'}
               </button>
             </form>
-            
-            <p className="text-sm text-[#c8b4a0]/70 mt-4">
-              We'll review and get back to you within 48 hours.
-            </p>
           </div>
 
           {/* Right side - Benefits */}
