@@ -170,8 +170,9 @@ export function HeroSection() {
       <div className="floating-element" style={{ top: "75%", left: "90%", animationDelay: "6.5s" }}></div>
 
       <div className="relative z-10 min-h-screen flex flex-col justify-between items-center px-8 py-16 md:px-16 md:py-20">
-        {/* X Logo */}
-        <div className="absolute top-6 left-1/2 transform -translate-x-1/2">
+        {/* Social Links */}
+        <div className="absolute top-6 left-1/2 transform -translate-x-1/2 flex items-center gap-4">
+          {/* X Logo */}
           <a
             href="https://x.com/turnstilefndn?s=11"
             target="_blank"
@@ -195,6 +196,24 @@ export function HeroSection() {
                 fill="#9ca3af"
               />
             </svg>
+          </a>
+          
+          {/* Pump.fun Logo */}
+          <a
+            href="https://pump.fun/coin/8BdvBpxDbKQFCz8kpo4yaaG2mNr5XeQnYmjjfwKQpump"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block opacity-0"
+            style={{
+              animation: "word-appear 1s ease-out forwards",
+              animationDelay: "0.4s"
+            }}
+          >
+            <img
+              src="https://logos-world.net/wp-content/uploads/2024/10/Pump-Fun-Logo-500x281.png"
+              alt="Pump.fun"
+              className="h-6 w-auto transition-transform hover:scale-110 duration-300"
+            />
           </a>
         </div>
 
