@@ -252,9 +252,17 @@ export default function Overview() {
                       {/* Service Name & Address */}
                       <td className="px-6 py-5">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#c8b4a0]/20 to-[#c8b4a0]/5 flex items-center justify-center group-hover:from-[#c8b4a0]/30 group-hover:to-[#c8b4a0]/10 transition-all flex-shrink-0">
-                            <span className="text-[#c8b4a0] font-bold text-lg">{service.name.charAt(0)}</span>
-                          </div>
+                          {service.logo ? (
+                            <img 
+                              src={service.logo} 
+                              alt={`${service.name} logo`}
+                              className="w-10 h-10 rounded-lg object-cover flex-shrink-0"
+                            />
+                          ) : (
+                            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#c8b4a0]/20 to-[#c8b4a0]/5 flex items-center justify-center group-hover:from-[#c8b4a0]/30 group-hover:to-[#c8b4a0]/10 transition-all flex-shrink-0">
+                              <span className="text-[#c8b4a0] font-bold text-lg">{service.name.charAt(0)}</span>
+                            </div>
+                          )}
                           <div>
                             <div className="text-[#f8f7f5] font-light group-hover:text-[#c8b4a0] transition-colors mb-0.5">
                               {service.endpoint.replace('https://', '').split('/')[0]}
@@ -314,9 +322,11 @@ export default function Overview() {
                       {/* Chain */}
                       <td className="px-6 py-5">
                         <div className="flex items-center justify-center gap-2">
-                          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center">
-                            <span className="text-white text-xs font-bold">S</span>
-                          </div>
+                          <img 
+                            src="https://res.cloudinary.com/dbdzl9lt6/image/upload/v1761631594/solana-sol-logo_xyph2m.png" 
+                            alt="Solana"
+                            className="w-6 h-6 object-contain"
+                          />
                         </div>
                       </td>
                     </tr>

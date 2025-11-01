@@ -120,9 +120,17 @@ export default function Browse() {
             >
               {/* Service Icon & Title */}
               <div className="flex items-start gap-4 mb-4">
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#c8b4a0]/20 to-[#c8b4a0]/5 flex items-center justify-center group-hover:from-[#c8b4a0]/30 group-hover:to-[#c8b4a0]/10 transition-all flex-shrink-0">
-                  <span className="text-[#c8b4a0] font-bold text-2xl">{service.name.charAt(0)}</span>
-                </div>
+                {service.logo ? (
+                  <img 
+                    src={service.logo} 
+                    alt={`${service.name} logo`}
+                    className="w-14 h-14 rounded-xl object-cover flex-shrink-0"
+                  />
+                ) : (
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#c8b4a0]/20 to-[#c8b4a0]/5 flex items-center justify-center group-hover:from-[#c8b4a0]/30 group-hover:to-[#c8b4a0]/10 transition-all flex-shrink-0">
+                    <span className="text-[#c8b4a0] font-bold text-2xl">{service.name.charAt(0)}</span>
+                  </div>
+                )}
                 <div className="flex-1 min-w-0">
                   <h3 className="text-xl font-light text-[#f8f7f5] group-hover:text-[#c8b4a0] transition-colors mb-1">
                     {service.name}

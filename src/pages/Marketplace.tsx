@@ -181,9 +181,17 @@ export default function Marketplace() {
                     {/* Service Name & Provider */}
                     <td className="px-8 py-5">
                       <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#c8b4a0]/20 to-[#c8b4a0]/5 flex items-center justify-center group-hover:from-[#c8b4a0]/30 group-hover:to-[#c8b4a0]/10 transition-all">
-                          <span className="text-[#c8b4a0] font-bold text-xl">{service.name.charAt(0)}</span>
-                        </div>
+                        {service.logo ? (
+                          <img 
+                            src={service.logo} 
+                            alt={`${service.name} logo`}
+                            className="w-12 h-12 rounded-xl object-cover"
+                          />
+                        ) : (
+                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#c8b4a0]/20 to-[#c8b4a0]/5 flex items-center justify-center group-hover:from-[#c8b4a0]/30 group-hover:to-[#c8b4a0]/10 transition-all">
+                            <span className="text-[#c8b4a0] font-bold text-xl">{service.name.charAt(0)}</span>
+                          </div>
+                        )}
                         <div>
                           <div className="text-[#f8f7f5] font-semibold text-base mb-1 group-hover:text-[#c8b4a0] transition-colors">{service.name}</div>
                           <div className="text-[#c8b4a0]/60 text-xs font-mono">{service.providerAddress}</div>
