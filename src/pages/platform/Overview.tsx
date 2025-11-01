@@ -5,13 +5,8 @@ import PlatformLayout from '../../components/platform/PlatformLayout';
 import { fetchServices } from '../../services/api';
 import type { Service } from '../../types/service';
 
-type SortField = 'txns' | 'volume' | 'buyers' | 'latest';
+type SortField = 'txns' | 'volume';
 type SortDirection = 'asc' | 'desc';
-
-interface ServiceWithExtras extends Service {
-  buyers: number;
-  minutesAgo: number;
-}
 
 export default function Overview() {
   const navigate = useNavigate();
@@ -43,13 +38,6 @@ export default function Overview() {
   const totalCalls = services.reduce((sum, s) => sum + s.callsLast24h, 0);
   const totalRevenue = services.reduce((sum, s) => sum + (s.revenue24h || 0), 0);
   const avgUptime = services.length > 0 ? services.reduce((sum, s) => sum + s.uptime, 0) / services.length : 0;
-  
-  // Generate consistent random data per service
-  const serviceData: ServiceWithExtras[] = services.map(service => ({
-    ...service,
-    buyers: Math.floor(Math.random() * 500 + 100),
-    minutesAgo: Math.floor(Math.random() * 60 + 1),
-  }));
 
   if (loading) {
     return (
@@ -70,7 +58,7 @@ export default function Overview() {
     }
   };
 
-  const allServices = [...serviceData].sort((a, b) => {
+  const allServices = [...services].sort((a, b) => {
     let aVal: number, bVal: number;
     
     switch (sortField) {
@@ -82,29 +70,12 @@ export default function Overview() {
         aVal = a.revenue24h || 0;
         bVal = b.revenue24h || 0;
         break;
-      case 'buyers':
-        aVal = a.buyers;
-        bVal = b.buyers;
-        break;
-      case 'latest':
-        aVal = a.minutesAgo;
-        bVal = b.minutesAgo;
-        break;
       default:
         return 0;
     }
     
     return sortDirection === 'asc' ? aVal - bVal : bVal - aVal;
   });
-
-  // Generate random sparkline data for each service
-  const generateSparklinePoints = () => {
-    const points = [];
-    for (let i = 0; i < 20; i++) {
-      points.push(Math.random() * 40 + 10);
-    }
-    return points;
-  };
 
   return (
     <PlatformLayout>
@@ -171,6 +142,18 @@ export default function Overview() {
 
       {/* Services Table - Exact x402scan structure */}
       <div className="mb-12 opacity-0 fade-in transition-opacity duration-700">
+        {services.length === 0 ? (
+          <div className="bg-[#1a1d18] border border-[#3c4237] rounded-2xl p-16 text-center">
+            <Activity className="w-16 h-16 text-[#c8b4a0]/30 mx-auto mb-4" />
+            <h3 className="text-2xl font-light text-[#f8f7f5] mb-2">No Services Listed Yet</h3>
+            <p className="text-[#c8b4a0]/70 font-light mb-6">
+              Services will appear here once providers list their APIs on the x402 marketplace.
+            </p>
+            <p className="text-[#c8b4a0]/50 text-sm font-light">
+              All data shown is real-time from Solana blockchain transactions.
+            </p>
+          </div>
+        ) : (
         <div className="bg-[#1a1d18] border border-[#3c4237] rounded-2xl overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
@@ -208,42 +191,13 @@ export default function Overview() {
                       )}
                     </div>
                   </th>
-                  <th 
-                    onClick={() => handleSort('buyers')}
-                    className="px-6 py-4 text-right text-[#c8b4a0]/70 text-xs font-light uppercase tracking-wider cursor-pointer hover:text-[#c8b4a0] transition-colors group"
-                  >
-                    <div className="flex items-center justify-end gap-2">
-                      <span>Buyers</span>
-                      {sortField === 'buyers' ? (
-                        sortDirection === 'desc' ? <ArrowDown className="w-3 h-3" /> : <ArrowUp className="w-3 h-3" />
-                      ) : (
-                        <ArrowUpDown className="w-3 h-3 opacity-0 group-hover:opacity-50 transition-opacity" />
-                      )}
-                    </div>
-                  </th>
-                  <th 
-                    onClick={() => handleSort('latest')}
-                    className="px-6 py-4 text-right text-[#c8b4a0]/70 text-xs font-light uppercase tracking-wider cursor-pointer hover:text-[#c8b4a0] transition-colors group"
-                  >
-                    <div className="flex items-center justify-end gap-2">
-                      <span>Latest</span>
-                      {sortField === 'latest' ? (
-                        sortDirection === 'desc' ? <ArrowDown className="w-3 h-3" /> : <ArrowUp className="w-3 h-3" />
-                      ) : (
-                        <ArrowUpDown className="w-3 h-3 opacity-0 group-hover:opacity-50 transition-opacity" />
-                      )}
-                    </div>
-                  </th>
                   <th className="px-6 py-4 text-center text-[#c8b4a0]/70 text-xs font-light uppercase tracking-wider">
                     Chain
                   </th>
                 </tr>
               </thead>
               <tbody>
-                {allServices.map(service => {
-                  const sparklinePoints = generateSparklinePoints();
-                  
-                  return (
+                {allServices.map(service => (
                     <tr
                       key={service.id}
                       onClick={() => navigate(`/v1/service/${service.id}`)}
@@ -272,18 +226,10 @@ export default function Overview() {
                         </div>
                       </td>
 
-                      {/* Activity Sparkline */}
+                      {/* Activity - Removed: No real-time data yet */}
                       <td className="px-6 py-5">
-                        <div className="flex items-center justify-center">
-                          <svg width="120" height="40" className="opacity-70">
-                            <polyline
-                              points={sparklinePoints.map((y, x) => `${x * 6},${50 - y}`).join(' ')}
-                              fill="none"
-                              stroke="#10b981"
-                              strokeWidth="2"
-                              className="group-hover:stroke-emerald-300 transition-colors"
-                            />
-                          </svg>
+                        <div className="flex items-center justify-center text-[#c8b4a0]/40 text-xs">
+                          —
                         </div>
                       </td>
 
@@ -305,19 +251,6 @@ export default function Overview() {
                         </span>
                       </td>
 
-                      {/* Buyers */}
-                      <td className="px-6 py-5 text-right">
-                        <span className="text-[#f8f7f5] font-light">
-                          {service.buyers > 1000 ? `${(service.buyers / 1000).toFixed(2)}K` : service.buyers}
-                        </span>
-                      </td>
-
-                      {/* Latest */}
-                      <td className="px-6 py-5 text-right">
-                        <span className="text-[#c8b4a0]/60 font-light text-sm">
-                          {service.minutesAgo}m ago
-                        </span>
-                      </td>
 
                       {/* Chain */}
                       <td className="px-6 py-5">
@@ -330,12 +263,12 @@ export default function Overview() {
                         </div>
                       </td>
                     </tr>
-                  );
-                })}
+                ))}
               </tbody>
             </table>
           </div>
         </div>
+        )}
       </div>
 
       {/* Quick Stats */}

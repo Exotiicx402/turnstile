@@ -3,14 +3,12 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, Copy, Check, TrendingUp, Zap, Clock, Activity } from 'lucide-react';
 import { fetchServiceById } from '../services/api';
 import type { Service } from '../types/service';
-import ActivityChart from '../components/charts/ActivityChart';
 
 export default function ServiceDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [service, setService] = useState<Service | null>(null);
   const [copied, setCopied] = useState(false);
-  const [metric, setMetric] = useState<'transactions' | 'volume' | 'buyers'>('transactions');
 
   useEffect(() => {
     const loadService = async () => {
@@ -173,59 +171,8 @@ export default function ServiceDetail() {
           </div>
         </div>
 
-        {/* Activity Chart */}
-        <div className="mb-8 opacity-0 fade-in transition-opacity duration-700">
-          <div className="bg-[#1a1d18] border border-[#3c4237] rounded-2xl p-8">
-            <h2 className="text-2xl font-extralight text-[#f8f7f5] mb-6">Activity</h2>
-            
-            {/* Metric Cards */}
-            <div className="grid grid-cols-3 gap-4 mb-6">
-              <button
-                onClick={() => setMetric('transactions')}
-                className={`p-4 rounded-xl border transition-all text-left ${
-                  metric === 'transactions'
-                    ? 'border-[#c8b4a0] bg-[#c8b4a0]/5'
-                    : 'border-[#3c4237] bg-[#2a2e26]/30 hover:border-[#c8b4a0]/50'
-                }`}
-              >
-                <p className="text-[#c8b4a0]/70 text-xs font-light mb-1">Transactions (7d)</p>
-                <p className="text-[#f8f7f5] text-2xl font-extralight">
-                  {(service.callsLast24h * 7 / 1000).toFixed(1)}K
-                </p>
-              </button>
-              
-              <button
-                onClick={() => setMetric('volume')}
-                className={`p-4 rounded-xl border transition-all text-left ${
-                  metric === 'volume'
-                    ? 'border-[#c8b4a0] bg-[#c8b4a0]/5'
-                    : 'border-[#3c4237] bg-[#2a2e26]/30 hover:border-[#c8b4a0]/50'
-                }`}
-              >
-                <p className="text-[#c8b4a0]/70 text-xs font-light mb-1">Volume (7d)</p>
-                <p className="text-[#f8f7f5] text-2xl font-extralight">
-                  ${((service.revenue24h || service.callsLast24h * service.pricePerCall) * 7).toFixed(2)}
-                </p>
-              </button>
-              
-              <button
-                onClick={() => setMetric('buyers')}
-                className={`p-4 rounded-xl border transition-all text-left ${
-                  metric === 'buyers'
-                    ? 'border-[#c8b4a0] bg-[#c8b4a0]/5'
-                    : 'border-[#3c4237] bg-[#2a2e26]/30 hover:border-[#c8b4a0]/50'
-                }`}
-              >
-                <p className="text-[#c8b4a0]/70 text-xs font-light mb-1">Buyers (7d est.)</p>
-                <p className="text-[#f8f7f5] text-2xl font-extralight">
-                  {((service.callsLast24h * 7) / 80).toFixed(1)}
-                </p>
-              </button>
-            </div>
-            
-            <ActivityChart metric={metric} service={service} />
-          </div>
-        </div>
+        {/* Activity Chart - Hidden until real-time data available */}
+        {/* Removed: Waiting for real blockchain transaction data */}
 
         {/* API Documentation */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
