@@ -8,7 +8,12 @@ export async function fetchServices(): Promise<Service[]> {
     if (!response.ok) {
       throw new Error(`Failed to fetch services: ${response.statusText}`);
     }
-    return await response.json();
+    const data = await response.json();
+    // Map MongoDB _id to id
+    return data.map((service: any) => ({
+      ...service,
+      id: service._id,
+    }));
   } catch (error) {
     console.error('Error fetching services:', error);
     return [];
@@ -21,7 +26,12 @@ export async function fetchServiceById(id: string): Promise<Service | null> {
     if (!response.ok) {
       throw new Error(`Failed to fetch service: ${response.statusText}`);
     }
-    return await response.json();
+    const data = await response.json();
+    // Map MongoDB _id to id
+    return {
+      ...data,
+      id: data._id,
+    };
   } catch (error) {
     console.error('Error fetching service:', error);
     return null;
