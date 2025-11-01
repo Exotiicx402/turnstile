@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Search, Filter, TrendingUp, Zap, Database, Brain, Code } from 'lucide-react';
-import ServiceCard from '../components/marketplace/ServiceCard';
+import { Search, Filter, TrendingUp, Zap, Database, Brain, Code, Star } from 'lucide-react';
 import ServiceModal from '../components/marketplace/ServiceModal';
 
 export interface Service {
@@ -301,8 +300,8 @@ export default function Marketplace() {
                 </tr>
               </thead>
               <tbody>
-                {filteredServices.map((service, index) => (
-                  <tr 
+                {filteredServices.map((service) => (
+                  <tr
                     key={service.id}
                     onClick={() => setSelectedService(service)}
                     className="border-b border-[#3c4237]/50 hover:bg-[#2a2e26]/50 cursor-pointer transition-all duration-200 group"
