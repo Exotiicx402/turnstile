@@ -1,20 +1,34 @@
 import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from 'recharts';
+import type { Service } from '../../types/service';
 
 type MetricType = 'transactions' | 'volume' | 'buyers';
 
 interface ActivityChartProps {
   metric: MetricType;
+  service: Service;
 }
 
-const chartData = [
-  { label: 'Mon', transactions: 8000, volume: 120, buyers: 450 },
-  { label: 'Tue', transactions: 9500, volume: 142, buyers: 520 },
-  { label: 'Wed', transactions: 11200, volume: 168, buyers: 610 },
-  { label: 'Thu', transactions: 10500, volume: 157, buyers: 580 },
-  { label: 'Fri', transactions: 13800, volume: 207, buyers: 750 },
-  { label: 'Sat', transactions: 14800, volume: 222, buyers: 820 },
-  { label: 'Sun', transactions: 13200, volume: 198, buyers: 730 },
-];
+// Generate realistic 7-day historical data based on current service metrics
+const generateChartData = (service: Service) => {
+  const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  const baseTransactions = service.callsLast24h;
+  const baseVolume = service.revenue24h || baseTransactions * service.pricePerCall;
+  const baseBuyers = Math.floor(baseTransactions / 80); // Assume avg 80 calls per buyer
+  
+  return days.map((label, index) => {
+    // Create variation: slightly lower earlier in week, trending up
+    const trend = 0.7 + (index / days.length) * 0.6; // 0.7 to 1.3 range
+    const randomVariation = 0.85 + Math.random() * 0.3; // 0.85 to 1.15 range
+    const factor = trend * randomVariation;
+    
+    return {
+      label,
+      transactions: Math.floor(baseTransactions * factor),
+      volume: Math.floor(baseVolume * factor),
+      buyers: Math.floor(baseBuyers * factor),
+    };
+  });
+};
 
 const metricConfig = {
   transactions: {
@@ -34,8 +48,9 @@ const metricConfig = {
   },
 };
 
-export default function ActivityChart({ metric }: ActivityChartProps) {
+export default function ActivityChart({ metric, service }: ActivityChartProps) {
   const config = metricConfig[metric];
+  const chartData = generateChartData(service);
 
   return (
     <div className="w-full h-80">

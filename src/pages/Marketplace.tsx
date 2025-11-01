@@ -64,8 +64,8 @@ export default function Marketplace() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center gap-3 mb-2">
             <img 
-              src="https://res.cloudinary.com/dbdzl9lt6/image/upload/v1761631718/Untitled_design_2_dada2f.png" 
-              alt="Turnstile Logo" 
+              src="https://res.cloudinary.com/dbdzl9lt6/image/upload/v1761631594/solana-sol-logo_xyph2m.png" 
+              alt="Solana Logo" 
               className="w-10 h-10 object-contain"
             />
             <div>

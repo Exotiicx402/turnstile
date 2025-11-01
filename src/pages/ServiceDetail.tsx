@@ -61,8 +61,8 @@ export default function ServiceDetail() {
           </button>
           <div className="flex items-start gap-4">
             <img 
-              src="https://res.cloudinary.com/dbdzl9lt6/image/upload/v1761631718/Untitled_design_2_dada2f.png" 
-              alt="Turnstile Logo" 
+              src="https://res.cloudinary.com/dbdzl9lt6/image/upload/v1761631594/solana-sol-logo_xyph2m.png" 
+              alt="Solana Logo" 
               style={{ width: '40px', height: '40px', objectFit: 'contain', flexShrink: 0 }}
             />
             <div className="flex flex-col justify-center">
@@ -188,8 +188,10 @@ export default function ServiceDetail() {
                     : 'border-[#3c4237] bg-[#2a2e26]/30 hover:border-[#c8b4a0]/50'
                 }`}
               >
-                <p className="text-[#c8b4a0]/70 text-xs font-light mb-1">Transactions</p>
-                <p className="text-[#f8f7f5] text-2xl font-extralight">154.24K</p>
+                <p className="text-[#c8b4a0]/70 text-xs font-light mb-1">Transactions (7d)</p>
+                <p className="text-[#f8f7f5] text-2xl font-extralight">
+                  {(service.callsLast24h * 7 / 1000).toFixed(1)}K
+                </p>
               </button>
               
               <button
@@ -200,8 +202,10 @@ export default function ServiceDetail() {
                     : 'border-[#3c4237] bg-[#2a2e26]/30 hover:border-[#c8b4a0]/50'
                 }`}
               >
-                <p className="text-[#c8b4a0]/70 text-xs font-light mb-1">Volume</p>
-                <p className="text-[#f8f7f5] text-2xl font-extralight">$1.55K</p>
+                <p className="text-[#c8b4a0]/70 text-xs font-light mb-1">Volume (7d)</p>
+                <p className="text-[#f8f7f5] text-2xl font-extralight">
+                  ${((service.revenue24h || service.callsLast24h * service.pricePerCall) * 7).toFixed(2)}
+                </p>
               </button>
               
               <button
@@ -212,12 +216,14 @@ export default function ServiceDetail() {
                     : 'border-[#3c4237] bg-[#2a2e26]/30 hover:border-[#c8b4a0]/50'
                 }`}
               >
-                <p className="text-[#c8b4a0]/70 text-xs font-light mb-1">Buyers</p>
-                <p className="text-[#f8f7f5] text-2xl font-extralight">1.93K</p>
+                <p className="text-[#c8b4a0]/70 text-xs font-light mb-1">Buyers (7d est.)</p>
+                <p className="text-[#f8f7f5] text-2xl font-extralight">
+                  {((service.callsLast24h * 7) / 80).toFixed(1)}
+                </p>
               </button>
             </div>
             
-            <ActivityChart metric={metric} />
+            <ActivityChart metric={metric} service={service} />
           </div>
         </div>
 

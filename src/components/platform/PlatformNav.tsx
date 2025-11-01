@@ -15,8 +15,8 @@ export default function PlatformNav() {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-3">
             <img 
-              src="https://res.cloudinary.com/dbdzl9lt6/image/upload/v1761631718/Untitled_design_2_dada2f.png" 
-              alt="Turnstile Logo" 
+              src="https://res.cloudinary.com/dbdzl9lt6/image/upload/v1761631594/solana-sol-logo_xyph2m.png" 
+              alt="Solana Logo" 
               className="w-8 h-8 object-contain"
             />
             <Link to="/v1" className="text-2xl font-extralight text-[#f8f7f5] hover:text-[#c8b4a0] transition-colors">
