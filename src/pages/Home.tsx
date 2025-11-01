@@ -2,6 +2,7 @@ import { HeroSection } from '../components/ui/hero-section'
 import { ContainerScroll } from '../components/ui/container-scroll-animation'
 import HowItWorks from '../components/ui/how-it-works'
 import RoadmapSection from '../components/ui/roadmap'
+import ProviderSignup from '../components/ui/provider-signup'
 import EmailSignup from '../components/ui/email-signup'
 
 export default function Home() {
@@ -30,6 +31,7 @@ export default function Home() {
       </div>
       <HowItWorks />
       <RoadmapSection />
+      <ProviderSignup />
       <EmailSignup />
       
       {/* Footer */}
